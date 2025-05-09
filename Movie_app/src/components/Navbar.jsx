@@ -26,9 +26,9 @@ export default function Navbar() {
             </ul>
             </div>
 
-          <Link to="/watchlist" className="text-white text-decoration-none d-flex align-items-center gap-1">
+          <Link to="/favorites" className="text-white text-decoration-none d-flex align-items-center gap-1">
             <FaHeart />
-            <span>watchlist</span>
+            <span>Favorites</span>
           </Link>
         </div>
       </div>

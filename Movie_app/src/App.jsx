@@ -1,18 +1,18 @@
-import React, { useState } from 'react'
-import {BrowserRouter} from 'react-router';
-import './App.css'
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';  // Fixed import
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 import RouteList from './Routes/RouteList';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
+    <Provider store={store}>
       <BrowserRouter>
-        <RouteList/>
+        <RouteList />
       </BrowserRouter>
-    </>
-  )
+    </Provider>
+  );
 }
 
-export default App
+export default App;

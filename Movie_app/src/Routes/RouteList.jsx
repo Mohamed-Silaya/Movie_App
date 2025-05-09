@@ -1,39 +1,27 @@
-import React from 'react'
-import { Route, Routes } from 'react-router'
-import MovieTest from '../Pages/MovieList'
-import MovieDetails from '../Pages/MovieDetails'
-<<<<<<< HEAD
-import NotFound from '../Pages/NotFound'
-import Navbar from '../components/Navbar'
-import Watchlist from '../Pages/Watchlist'
-
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import MovieTest from '../Pages/MovieList';
+import MovieDetails from '../Pages/MovieDetails';
+import FavoritesPage from '../Pages/FavoritesPage';
+import Watchlist from '../Pages/Watchlist';
+import NotFound from '../Pages/NotFound';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 function RouteList() {
   return (
     <>
-      <Navbar/>
-    <Routes>
-        <Route path='/'                 element={<MovieTest/>}/>
-        <Route path='/MovieDetails/:id' element={<MovieDetails/>}/>
-        <Route path='/watchlist'        element={<Watchlist/>}/>
-        <Route path='*'                element={<NotFound/>}/>
-    </Routes>
-=======
-import Footer from '../components/Footer'
-function RouteList() {
-  return (
-    
-    <>
+      <Navbar />
       <Routes>
-          <Route path='/'                  element={<MovieTest/>}/>
-          <Route path='/MovieDetails/:id' element={<MovieDetails/>}/>
+        <Route path='/' element={<MovieTest />} />
+        <Route path='/MovieDetails/:id' element={<MovieDetails />} />
+        <Route path='/favorites' element={<FavoritesPage />} />
+        <Route path='/watchlist' element={<Watchlist />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
-      <Footer/>
->>>>>>> 63308a109ea0cee0e0da46273b29dcebea8522d4
+      <Footer />
     </>
-  )
+  );
 }
 
-export default RouteList
-
-
+export default RouteList;
