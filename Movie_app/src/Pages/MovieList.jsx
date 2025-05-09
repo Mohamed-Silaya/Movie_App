@@ -41,7 +41,7 @@ export default function MovieList() {
     const pageNum = [];
     const maxShow =5;
     const half =Math.floor(maxShow /2);
-    const start = Math.max(currentPage-half,1)
+    let start = Math.max(currentPage-half,1)
     const end = Math.min(start+maxShow+1,pages)
     if (end - start < maxShow -1){
       start = Math.max(end - maxShow+1,1)
