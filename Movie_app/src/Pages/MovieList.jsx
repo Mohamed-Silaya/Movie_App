@@ -7,6 +7,7 @@ import MovieCard from "../components/MovieCard";
 export default function MovieList() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     axiosInstance
       .get("/movie/popular")
@@ -14,10 +15,9 @@ export default function MovieList() {
       .catch((err) => console.log(err))
       .finally(() => setIsLoading(false));
   }, []);
-  console.log(movies);
 
   return (
-    <>
+    <div className="movie-list-container">
       <div className="container">
         <div className="heading text-center">
           <h2>Movie List</h2>
@@ -29,18 +29,13 @@ export default function MovieList() {
           </div>
         )}
         <div className="row">
-          {movies.map((movie )=> {
-            return (
-              <div className="col-md-3" key={movie.id}>
-                <MovieCard
-                  movieItem={movie}
-                  // onDelete={(id) => handleDelete(id)}
-                />
-              </div>
-            );
-          })}
+          {movies.map((movie) => (
+            <div className="col-md-3" key={movie.id}>
+              <MovieCard movieItem={movie} />
+            </div>
+          ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }
