@@ -1,0 +1,16 @@
+
+.heading{
+    h2{
+        font-size: 34px;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-weight: bolder;
+        color: rgba(255, 248, 220, 0.883);
+        text-shadow: 3px 1px 8px #000;
+    }
+}
+.row{
+    gap: 10px 0px;
+
+    background-color: transparent;
+
+}
