@@ -8,6 +8,7 @@ import NotFound from '../Pages/NotFound';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import TVShowList from "../Pages/TVShowList";
+import TVShowDetails from "../Pages/TVShowDetails";
 
 function RouteList() {
   return (
@@ -20,6 +21,7 @@ function RouteList() {
         <Route path='/favorites' element={<FavoritesPage />} />
         <Route path='/watchlist' element={<Watchlist />} />
         <Route path='*' element={<NotFound />} />
+        <Route path="/TVShowDetails/:id" element={<TVShowDetails />} />
       </Routes>
       <Footer />
     </>

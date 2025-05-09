@@ -6,7 +6,7 @@ const TVShowCard = ({ show }) => {
   const navigate = useNavigate(); 
   
   const goToDetails = () => {
-    navigate(`/tv/${show.id}`);
+    navigate(`/TVShowDetails/${show.id}`);
   };
 
   return (
