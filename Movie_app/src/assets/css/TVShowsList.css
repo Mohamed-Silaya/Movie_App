@@ -1,0 +1,20 @@
+.tv-show-list {
+  padding: 20px;
+  text-align: center;
+}
+
+.tv-show-list h2 {
+  font-size: 34px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bolder;
+  color: rgba(255, 248, 220, 0.883);
+  text-shadow: 3px 1px 8px #000;
+}
+
+.tv-show-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 20px;
+  justify-items: center;
+}

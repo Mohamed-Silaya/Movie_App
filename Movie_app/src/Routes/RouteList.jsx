@@ -7,6 +7,7 @@ import Watchlist from '../Pages/Watchlist';
 import NotFound from '../Pages/NotFound';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import TVShowList from "../Pages/TVShowList";
 
 function RouteList() {
   return (
@@ -14,6 +15,7 @@ function RouteList() {
       <Navbar />
       <Routes>
         <Route path='/' element={<MovieTest />} />
+         <Route path="/TVShowList" element={<TVShowList />} />
         <Route path='/MovieDetails/:id' element={<MovieDetails />} />
         <Route path='/favorites' element={<FavoritesPage />} />
         <Route path='/watchlist' element={<Watchlist />} />
