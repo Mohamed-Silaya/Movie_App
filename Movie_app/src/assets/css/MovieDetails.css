@@ -1,0 +1,119 @@
+/* MovieDetails.css */
+.movie-details-container {
+    color: white;
+    min-height: 100vh;
+  }
+  
+  .movie-backdrop {
+    background-size: cover;
+    background-position: center;
+    padding: 2rem;
+  }
+  
+  .movie-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+  
+  .poster-section {
+    flex: 0 0 300px;
+  }
+  
+  .movie-poster {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  
+  .details-section {
+    flex: 1;
+  }
+  
+  .movie-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .metadata {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #cccccc;
+  }
+  
+  .genres {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+  
+  .genre-tag {
+    background: rgba(255,255,255,0.1);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+  }
+  
+  .overview {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin-bottom: 2rem;
+    color: #e0e0e0;
+  }
+  
+  .additional-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    background: rgba(0,0,0,0.5);
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+  
+  .info-group h3 {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .info-group p {
+    font-size: 1.1rem;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .movie-content {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .poster-section {
+      flex: none;
+      max-width: 250px;
+    }
+    
+    .movie-title {
+      font-size: 2rem;
+      text-align: center;
+    }
+    
+    .metadata {
+      justify-content: center;
+    }
+  }
+
+  .loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #1b1c1d;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 2rem auto;
+  }
+  
