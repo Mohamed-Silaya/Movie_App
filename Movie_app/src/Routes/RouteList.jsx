@@ -5,10 +5,12 @@ import MovieDetails from '../Pages/MovieDetails'
 function RouteList() {
   return (
     <Routes>
-        <Route path='/' element={<MovieTest/>}/>
-        <Route path='/movie-details/:id' element={<MovieDetails/>}/>
+        <Route path='/'                  element={<MovieTest/>}/>
+        <Route path='/MovieDetails/:id' element={<MovieDetails/>}/>
     </Routes>
   )
 }
 
 export default RouteList
+
+

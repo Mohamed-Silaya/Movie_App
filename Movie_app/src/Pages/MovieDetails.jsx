@@ -1,7 +1,8 @@
-import React from 'react'
+import React from "react";
+import { useParams } from "react-router";
 
 export default function MovieDetails() {
-  return (
-    <div>MovieDetails</div>
-  )
+  const params = useParams();
+  console.log(params);
+  return <div>MovieDetails</div>;
 }

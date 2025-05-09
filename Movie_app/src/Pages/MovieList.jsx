@@ -29,7 +29,7 @@ export default function MovieList() {
           </div>
         )}
         <div className="row">
-          {movies.map((movie) => {
+          {movies.map((movie )=> {
             return (
               <div className="col-md-3" key={movie.id}>
                 <MovieCard
