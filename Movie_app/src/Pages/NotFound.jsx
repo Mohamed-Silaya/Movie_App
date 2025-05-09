@@ -8,8 +8,9 @@ export default function NotFound() {
       <p className="text-muted mb-4">
         Sorry, the page you are looking for does not exist or has been moved.
       </p>
-      <Link to="/" className="btn btn-primary px-4">
-        Go Back to Home
+      <Link to="/" className="btn px-4"
+          style={{ backgroundColor: "#1c1c1c", borderColor: "red", color: "#fff" }} >
+          Go Back to Home
       </Link>
     </div>
   );
