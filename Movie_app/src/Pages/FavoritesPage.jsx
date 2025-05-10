@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectFavorites, toggleFavorite } from '../store/favoritesSlice';
-import "../assets/css/MovieCard.css"; // Contains both .card and .tv-show-card styles
+import "../assets/css/MovieCard.css"; // use this CSS for both
 
 export default function FavoritesPage() {
   const favorites = useSelector(selectFavorites);
@@ -46,7 +46,7 @@ export default function FavoritesPage() {
         {filteredFavorites.length > 0 ? (
           filteredFavorites.map((fav) => (
             <div
-              className={fav.type === 'movie' ? 'card mb-2' : 'tv-show-card'}
+              className="card mb-3"
               style={{ width: '250px' }}
               key={fav.id}
               onClick={() => goToDetails(fav)}
@@ -54,25 +54,20 @@ export default function FavoritesPage() {
               <div className="card-img">
                 <img
                   src={`https://image.tmdb.org/t/p/w500/${fav.poster_path}`}
-                  className={fav.type === 'movie' ? 'card-img-top movie-poster' : 'tv-show-img'}
+                  className="card-img-top movie-poster"
                   alt={fav.title || fav.name}
                 />
               </div>
 
               <div className="card-body">
-                <h5 className="card-title">
-                  {fav.type === 'movie' ? fav.title : fav.name}
-                </h5>
+                <h5 className="card-title">{fav.title || fav.name}</h5>
               </div>
 
               <div className="card-foot d-flex justify-content-between">
                 <h3 className="mt-2">
-                  {fav.type === 'movie' ? fav.release_date : fav.first_air_date}
+                  {fav.release_date || fav.first_air_date}
                 </h3>
-                <button
-                  onClick={(e) => handleFavoriteClick(e, fav)}
-                  className={fav.type === 'tv' ? 'like-button' : ''}
-                >
+                <button onClick={(e) => handleFavoriteClick(e, fav)}>
                   <i className={`fa-solid fa-heart ${isFavorite(fav.id) ? 'text-danger' : ''}`}></i>
                 </button>
               </div>
