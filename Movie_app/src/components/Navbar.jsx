@@ -34,13 +34,13 @@ export default function Navbar() {
             </ul>
           </div>
           <Link
-            to="/tv-shows"
+            to="/TVShowList"
             className="text-white text-decoration-none d-flex align-items-center gap-1"
           >
             <span>TV-Shows</span>
           </Link>
           <Link
-            to="/FavoritesPage"
+            to="/favorites"
             className="text-white text-decoration-none d-flex align-items-center gap-1"
           >
             <FaHeart />
