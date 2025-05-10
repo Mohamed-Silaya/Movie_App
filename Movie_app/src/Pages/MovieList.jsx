@@ -3,12 +3,15 @@ import { axiosInstance } from "../apis/config";
 import "../assets/css/MovieList.css";
 import MovieCard from "../components/MovieCard";
 import SearchBar from "../components/SearchBar";  
+import { useNavigate } from "react-router-dom";
 
 export default function MovieList() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [pages, setPages] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     axiosInstance
@@ -50,10 +53,18 @@ export default function MovieList() {
     return pageNum;
   };
 
+  const handleSearch = () => {
+    navigate(`/search?query=${searchQuery}`);
+  };
+
   return (
     <div className="movie-list-container">
       <div className="container">
-        <SearchBar /> {/* ✅ Show search bar at top */}
+        <SearchBar 
+          searchQuery={searchQuery} 
+          setSearchQuery={setSearchQuery} 
+          handleSearch={handleSearch} 
+        />
         <div className="heading text-center">
           <h2>Movie List</h2>
         </div>

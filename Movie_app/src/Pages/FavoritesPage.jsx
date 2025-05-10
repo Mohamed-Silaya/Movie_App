@@ -2,12 +2,20 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectFavorites } from '../store/favoritesSlice';
 import MovieCard from '../components/MovieCard';
+import { useNavigate } from "react-router-dom";
+import SearchBar from '../components/SearchBar';  // إضافة الاستيراد هنا
 
 export default function FavoritesPage() {
   const favorites = useSelector(selectFavorites);
   const [selectedType, setSelectedType] = useState('movie');
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
 
   const filteredFavorites = favorites.filter(fav => fav.type === selectedType);
+
+  const handleSearch = () => {
+    navigate(`/search?query=${searchQuery}`);
+  };
 
   return (
     <div className="container">
@@ -29,6 +37,11 @@ export default function FavoritesPage() {
         </div>
       </div>
       <hr />
+      <SearchBar 
+        searchQuery={searchQuery} 
+        setSearchQuery={setSearchQuery} 
+        handleSearch={handleSearch} 
+      />
       <div className="row">
         {filteredFavorites.map((fav) => (
           <div className="col-md-3" key={`${fav.type}-${fav.id}`}>
