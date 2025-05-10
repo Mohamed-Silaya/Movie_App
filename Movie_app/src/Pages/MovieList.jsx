@@ -53,7 +53,7 @@ export default function MovieList() {
   return (
     <div className="movie-list-container">
       <div className="container">
-        <SearchBar /> {/* ✅ Show search bar at top */}
+        <SearchBar /> 
         <div className="heading text-center">
           <h2>Movie List</h2>
         </div>
