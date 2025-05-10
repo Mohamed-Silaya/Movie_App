@@ -32,7 +32,7 @@
     margin: 0;
     color: #f5f5f5;
     font-family: 'Arial', sans-serif;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 4px #ffffff6d;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

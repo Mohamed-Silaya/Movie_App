@@ -27,8 +27,8 @@ export default function MovieCard({ movieItem }) {
   }
 
   return (
-    <div className="card mb-3" onClick={() => reDirectToDetails(movieItem.id)}>
-      <div className="card-img">
+    <div className="card mb-3">
+      <div className="card-img" onClick={() => reDirectToDetails(movieItem.id)}>
         <img 
           src={`https://image.tmdb.org/t/p/w500/${movieItem.poster_path}`} 
           className="card-img-top movie-poster" 
