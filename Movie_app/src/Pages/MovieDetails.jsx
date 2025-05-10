@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorite, selectFavorites } from "../store/favoritesSlice";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { axiosInstance, axiosImages } from "../apis/config.js";
+import { Link } from "react-router-dom";
 import "../assets/css/MovieDetails.css";
 
 export default function MovieDetails() {
   const [movie, setMovie] = useState();
-  const [recommendedMovies, setRecommendedMovies] = useState([]); // Add state for recommendations
+  const [recommendedMovies, setRecommendedMovies] = useState([]); 
 
   const [isLoading, setIsLoading] = useState(true);
   const params = useParams();
@@ -46,6 +47,10 @@ export default function MovieDetails() {
 
         setMovie(movieResponse.data);
         setRecommendedMovies(recommendationsResponse.data.results || []);
+        // Shows limited recommendations
+        // setRecommendedMovies(
+        //   recommendationsResponse.data.results.slice(0, 6) || []
+        // );
       } catch (err) {
         console.error("Error fetching data:", err);
       } finally {
@@ -126,6 +131,39 @@ export default function MovieDetails() {
             </div>
           </div>
         )
+      )}
+
+      {/* Recommendations Section */}
+      {recommendedMovies.length > 0 && (
+        <div className="recommendations-section mt-5">
+          <h2 className="text-white mb-3">Recommended Movies</h2>
+          <div className="d-flex gap-3 overflow-auto pb-3">
+            {recommendedMovies.map((movie) => (
+              <Link
+                to={`/MovieDetails/${movie.id}`}
+                key={movie.id}
+                className="text-center flex-shrink-0 recommendation-card"
+              >
+                <img
+                  src={`${axiosImages.defaults.baseURL}${movie.poster_path}`}
+                  alt={movie.title}
+                  className="img-fluid rounded"
+                  style={{
+                    width: "150px",
+                    height: "225px",
+                    objectFit: "cover",
+                  }}
+                />
+                <p className="text-white mt-1 mb-0">{movie.title}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* if no recommendations */}
+      {recommendedMovies.length === 0 && !isLoading && (
+        <p className="text-white mt-4">No recommendations available.</p>
       )}
     </div>
   );
