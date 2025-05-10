@@ -19,3 +19,33 @@
   margin-top: 20px;
   justify-items: center;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 20px;
+}
+.pagination button {
+  padding: 0.5rem 1rem;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #666;
+  transform: scale(1.05);
+}
+.pagination button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+.pagination span {
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+}

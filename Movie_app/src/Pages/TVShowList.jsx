@@ -11,7 +11,6 @@ const TVShowList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
- 
   const fetchTVShows = async (pageNum) => {
       setLoading(true);     
       try {
@@ -31,7 +30,6 @@ const TVShowList = () => {
      fetchTVShows(page);
   }, [page]);
 
- 
 
   const goToNextPage = () => setPage((prev) => prev + 1);
   const goToPrevPage = () => setPage((prev) => (prev > 1 ? prev - 1 : 1));
@@ -46,6 +44,13 @@ const TVShowList = () => {
         {tvShows.map((show) => (
           <TVShowCard key={show.id} show={show} />
         ))}
+      </div>
+      <div className="pagination">
+        <button onClick={goToPrevPage} disabled={page === 1}>
+          Previous
+        </button>
+        <span>Page {page}</span>
+        <button onClick={goToNextPage}>Next</button>
       </div>
     </div>
   );
