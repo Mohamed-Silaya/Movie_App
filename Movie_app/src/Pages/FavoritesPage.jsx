@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectFavorites, toggleFavorite } from '../store/favoritesSlice';
-import "../assets/css/MovieCard.css"; // use this CSS for both
-
+import "../assets/css/MovieCard.css"; 
 export default function FavoritesPage() {
   const favorites = useSelector(selectFavorites);
   const dispatch = useDispatch();
