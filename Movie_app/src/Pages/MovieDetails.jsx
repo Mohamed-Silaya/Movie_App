@@ -8,32 +8,52 @@ import "../assets/css/MovieDetails.css";
 
 export default function MovieDetails() {
   const [movie, setMovie] = useState();
+  const [recommendedMovies, setRecommendedMovies] = useState([]); // Add state for recommendations
+
   const [isLoading, setIsLoading] = useState(true);
   const params = useParams();
-
+  // ===========================================================
   const dispatch = useDispatch();
   const favorites = useSelector(selectFavorites);
-const isFavorite = favorites.some(fav => fav.id === movie?.id && fav.type === "movie");
+  const isFavorite = favorites.some(
+    (fav) => fav.id === movie?.id && fav.type === "movie"
+  );
 
-const handleFavoriteClick = (e) => {
-  e.stopPropagation();
-  dispatch(toggleFavorite({
-    id: movie.id,
-    type: "movie",
-    title: movie.title,
-    poster_path: movie.poster_path,
-    release_date: movie.release_date
-  }));
-};
+  const handleFavoriteClick = (e) => {
+    e.stopPropagation();
+    dispatch(
+      toggleFavorite({
+        id: movie.id,
+        type: "movie",
+        title: movie.title,
+        poster_path: movie.poster_path,
+        release_date: movie.release_date,
+      })
+    );
+  };
+  // ===========================================================
   const movieId = Number(params.id);
 
   useEffect(() => {
-    axiosInstance
-      .get(`/movie/${params.id}`)
-      .then((res) => setMovie(res.data))
-      .catch((err) => console.log(err))
-      .finally(() => setIsLoading(false));
-  }, [params.id]);
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        const [movieResponse, recommendationsResponse] = await Promise.all([
+          axiosInstance.get(`/movie/${id}`),
+          axiosInstance.get(`/movie/${id}/recommendations`),
+        ]);
+
+        setMovie(movieResponse.data);
+        setRecommendedMovies(recommendationsResponse.data.results || []);
+      } catch (err) {
+        console.error("Error fetching data:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [id]);
 
   return (
     <div className="movie-details-container">
@@ -49,7 +69,9 @@ const handleFavoriteClick = (e) => {
             className="movie-backdrop"
             style={{
               backgroundImage: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                url(${axiosImages.defaults.baseURL}${movie?.backdrop_path || ''})`
+                url(${axiosImages.defaults.baseURL}${
+                movie?.backdrop_path || ""
+              })`,
             }}
           >
             <div className="movie-content animate-fade-in">
@@ -60,12 +82,12 @@ const handleFavoriteClick = (e) => {
                   alt={movie.title}
                 />
 
-<div className="favorite-heart-container">
-    <FaHeart
-      className={`heart-icon ${isFavorite ? 'active' : ''}`}
-      onClick={handleFavoriteClick}
-    />
-  </div>                 
+                <div className="favorite-heart-container">
+                  <FaHeart
+                    className={`heart-icon ${isFavorite ? "active" : ""}`}
+                    onClick={handleFavoriteClick}
+                  />
+                </div>
               </div>
 
               <div className="details-section animate-slide-in-delayed">
@@ -87,9 +109,7 @@ const handleFavoriteClick = (e) => {
                   </div>
                 )}
 
-                {movie.overview && (
-                  <p className="overview">{movie.overview}</p>
-                )}
+                {movie.overview && <p className="overview">{movie.overview}</p>}
 
                 <div className="additional-info">
                   <div className="info-group">
