@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { axiosInstance } from "../apis/config";
 import "../assets/css/MovieList.css";
 import MovieCard from "../components/MovieCard";
+import SearchBar from "../components/SearchBar";  
 
 export default function MovieList() {
   const [movies, setMovies] = useState([]);
@@ -52,6 +53,7 @@ export default function MovieList() {
   return (
     <div className="movie-list-container">
       <div className="container">
+        <SearchBar /> {/* ✅ Show search bar at top */}
         <div className="heading text-center">
           <h2>Movie List</h2>
         </div>

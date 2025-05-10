@@ -1,15 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "react-router";
+import { useParams } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleFavorite, selectFavorites } from "../store/favoritesSlice";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { axiosInstance, axiosImages } from "../apis/config.js";
 import "../assets/css/MovieDetails.css";
+
 export default function MovieDetails() {
   const [movie, setMovie] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const params = useParams();
 
-  const [] = useSearchParams();
+  const dispatch = useDispatch();
+  const favorites = useSelector(selectFavorites);
+const isFavorite = favorites.some(fav => fav.id === movie?.id && fav.type === "movie");
 
-  console.log(params);
+const handleFavoriteClick = (e) => {
+  e.stopPropagation();
+  dispatch(toggleFavorite({
+    id: movie.id,
+    type: "movie",
+    title: movie.title,
+    poster_path: movie.poster_path,
+    release_date: movie.release_date
+  }));
+};
+  const movieId = Number(params.id);
 
   useEffect(() => {
     axiosInstance
@@ -19,9 +35,7 @@ export default function MovieDetails() {
       .finally(() => setIsLoading(false));
   }, [params.id]);
 
-
   return (
-    
     <div className="movie-details-container">
       {isLoading ? (
         <div className="loading-overlay">
@@ -31,24 +45,32 @@ export default function MovieDetails() {
         </div>
       ) : (
         movie && (
-          <div className="movie-backdrop" style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-              url(${axiosImages.defaults.baseURL}${movie?.backdrop_path || ''})`
-          }}>
+          <div
+            className="movie-backdrop"
+            style={{
+              backgroundImage: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                url(${axiosImages.defaults.baseURL}${movie?.backdrop_path || ''})`
+            }}
+          >
             <div className="movie-content animate-fade-in">
               <div className="poster-section">
                 <img
                   className="movie-poster animate-slide-in"
                   src={`${axiosImages.defaults.baseURL}${movie?.poster_path}`}
                   alt={movie.title}
-              
-                  
                 />
+
+<div className="favorite-heart-container">
+    <FaHeart
+      className={`heart-icon ${isFavorite ? 'active' : ''}`}
+      onClick={handleFavoriteClick}
+    />
+  </div>                 
               </div>
-              
+
               <div className="details-section animate-slide-in-delayed">
                 <h1 className="movie-title">{movie.title}</h1>
-                
+
                 <div className="metadata">
                   <span className="release-date">{movie.release_date}</span>
                   <span className="runtime">{movie.runtime} mins</span>

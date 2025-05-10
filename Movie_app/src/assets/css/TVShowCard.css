@@ -1,0 +1,63 @@
+.tv-show-card {
+  width: 250px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #1c1c1c;
+  color: #fff;
+  position: relative;
+  cursor: pointer;
+}
+
+.tv-show-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+}
+
+.tv-show-card img {
+  width: 100%;
+  height: 375px;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+  transition: transform 0.4s ease;
+}
+
+.tv-show-card img:hover {
+  transform: scale(1.05);
+}
+
+.tv-show-card h3 {
+  font-size: 20px;
+  font-weight: bolder;
+  font-family: fantasy;
+  margin: 10px 7px;
+  text-shadow: 2px 2px 4px #ffffff5c;
+}
+
+.tv-show-card p {
+  font-size: 14px;
+  color: rgba(255, 242, 240, 0.5);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin:5px 0 40px 40px;
+  text-align: center;
+}
+
+.like-button {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: white;
+  color: gray;
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.like-button:hover {
+  background: #b30b13;
+  color: white;
+}
