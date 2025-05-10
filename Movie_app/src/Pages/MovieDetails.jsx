@@ -32,7 +32,8 @@ export default function MovieDetails() {
     );
   };
   // ===========================================================
-  const movieId = Number(params.id);
+  const { id } = useParams();
+  const movieId = Number(id);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,7 +54,7 @@ export default function MovieDetails() {
     };
 
     fetchData();
-  }, [id]);
+  }, [movieId]);
 
   return (
     <div className="movie-details-container">
