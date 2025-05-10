@@ -7,11 +7,8 @@ import SearchBar from "../components/SearchBar";
 export default function MovieList() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-<<<<<<< HEAD
-=======
   const [currentPage, setCurrentPage] = useState(1);
   const [pages, setPages] = useState(1);
->>>>>>> origin/main
 
   useEffect(() => {
     axiosInstance
@@ -24,32 +21,6 @@ export default function MovieList() {
       })
       .catch((err) => console.log(err))
       .finally(() => setIsLoading(false));
-<<<<<<< HEAD
-  }, []);
-
-  return (
-    <div className="container">
-      <SearchBar /> {/* ✅ Show search bar at top */}
-
-      <div className="heading text-center mt-4">
-        <h2>Popular Movies</h2>
-      </div>
-      <hr />
-
-      {isLoading && (
-        <div className="spinner-border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      )}
-
-      <div className="row">
-        {movies.map((movie) => (
-          <div className="col-md-3 mb-4" key={movie.id}>
-            <MovieCard movieItem={movie} />
-          </div>
-        ))}
-      </div>
-=======
   }, [currentPage]);
 
   const handlePageClick = (newPage) => {
@@ -82,6 +53,7 @@ export default function MovieList() {
   return (
     <div className="movie-list-container">
       <div className="container">
+        <SearchBar /> {/* ✅ Show search bar at top */}
         <div className="heading text-center">
           <h2>Movie List</h2>
         </div>
@@ -114,7 +86,6 @@ export default function MovieList() {
           </ul>
         </nav>
       </div>
->>>>>>> origin/main
     </div>
   );
 }
