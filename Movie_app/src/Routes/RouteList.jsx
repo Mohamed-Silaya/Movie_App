@@ -5,25 +5,24 @@ import MovieDetails from "../Pages/MovieDetails";
 import SearchPage from "../Pages/SearchPage";
 import FavoritesPage from "../Pages/FavoritesPage";
 import NotFound from "../Pages/NotFound";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import TVShowList from "../Pages/TVShowList";
 import TVShowDetails from "../Pages/TVShowDetails";
+import LayoutsWithNavFooter from "../components/LayoutsWithNavFooter";
 
 function RouteList() {
   return (
     <>
-      <Navbar />
       <Routes>
-        <Route path="/" element={<MovieList />} />
-        <Route path="/TVShowList" element={<TVShowList />} />
-        <Route path="/MovieDetails/:id" element={<MovieDetails />} />
-        <Route path="/favorites" element={<FavoritesPage />} />
+        <Route element={<LayoutsWithNavFooter/>}>
+          <Route path="/" element={<MovieList />} />
+          <Route path="/TVShowList" element={<TVShowList />} />
+          <Route path="/MovieDetails/:id" element={<MovieDetails />} />
+          <Route path="/favorites" element={<FavoritesPage />} />
+          <Route path="/TVShowDetails/:id" element={<TVShowDetails />} />
+          <Route path="/search" element={<SearchPage />} />
+        </Route>
         <Route path="*" element={<NotFound />} />
-        <Route path="/TVShowDetails/:id" element={<TVShowDetails />} />
-        <Route path="/search" element={<SearchPage />} />
       </Routes>
-      <Footer />
     </>
   );
 }

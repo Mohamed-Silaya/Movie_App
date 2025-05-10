@@ -54,7 +54,7 @@ export default function MovieList() {
     <div className="movie-list-container">
       <div className="container">
         <SearchBar /> {/* ✅ Show search bar at top */}
-        <div className="heading text-center">
+        <div className="heading text-center mt-3">
           <h2>Movie List</h2>
         </div>
         <hr />
