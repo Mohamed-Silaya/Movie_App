@@ -116,4 +116,25 @@
     animation: spin 1s linear infinite;
     margin: 2rem auto;
   }
+  /*fav icon*/
+  .favorite-heart-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .heart-icon {
+    font-size: 2.2rem;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .heart-icon.active {
+    color: red;
+  }
+  
+  .heart-icon:hover {
+    transform: scale(1.1);
+  }
   
