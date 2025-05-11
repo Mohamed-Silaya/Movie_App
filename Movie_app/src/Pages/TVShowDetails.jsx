@@ -5,7 +5,7 @@ import { toggleFavorite, selectFavorites } from "../store/favoritesSlice";
 import { FaHeart } from "react-icons/fa";
 import { axiosInstance, axiosImages } from "../apis/config.js";
 import "../assets/css/TVShowDetails.css";
-
+//
 export default function TvShowDetails() {
   const [tvshow, setTvShow] = useState();
   const [isLoading, setIsLoading] = useState(true);
