@@ -112,18 +112,22 @@
 //   );
 // }
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorite, selectFavorites } from "../store/favoritesSlice";
 import { FaHeart } from "react-icons/fa";
 import { axiosInstance, axiosImages } from "../apis/config.js";
 import "../assets/css/TVShowDetails.css";
+<<<<<<< HEAD
 import { useLanguage } from "../context/LanguageContext";
+=======
+>>>>>>> 7be876ea94c75750ffd5a1c5032bf5a6660ed0ab
 
 export default function TvShowDetails() {
   const [tvshow, setTvShow] = useState();
+  const [recommendedShows, setRecommendedShows] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const params = useParams();
+  const { id } = useParams();
   const dispatch = useDispatch();
   const favorites = useSelector(selectFavorites);
   const { language } = useLanguage();
@@ -146,12 +150,34 @@ export default function TvShowDetails() {
   };
 
   useEffect(() => {
+<<<<<<< HEAD
     axiosInstance
       .get(`/tv/${params.id}?language=${language}`)
       .then((res) => setTvShow(res.data))
       .catch((err) => console.log(err))
       .finally(() => setIsLoading(false));
   }, [params.id, language]);
+=======
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        const [showResponse, recommendationsResponse] = await Promise.all([
+          axiosInstance.get(`/tv/${id}`),
+          axiosInstance.get(`/tv/${id}/recommendations`)
+        ]);
+
+        setTvShow(showResponse.data);
+        setRecommendedShows(recommendationsResponse.data.results);
+      } catch (err) {
+        console.error("Error fetching data:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+>>>>>>> 7be876ea94c75750ffd5a1c5032bf5a6660ed0ab
 
   return (
     <div className="tvshow-details-container">
@@ -222,6 +248,43 @@ export default function TvShowDetails() {
             </div>
           </div>
         )
+      )}
+
+      {/* Recommendations  */}
+      {recommendedShows.length > 0 && (
+        <div className="recommendations-section mt-5">
+          <h2 className="text-white mb-3">Recommended TV Shows</h2>
+          <div className="d-flex gap-3 overflow-auto pb-3">
+            {recommendedShows.map((show) => (
+              <Link
+                to={`/tv/${show.id}`}
+                key={show.id}
+                className="text-center flex-shrink-0 recommendation-card"
+              >
+                <img
+                  src={`${axiosImages.defaults.baseURL}${show.poster_path}`}
+                  alt={show.name}
+                  className="img-fluid rounded"
+                  style={{
+                    width: "150px",
+                    height: "225px",
+                    objectFit: "cover",
+                  }}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = '/placeholder.jpg';
+                  }}
+                />
+                <p className="text-white mt-1 mb-0">{show.name}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+
+      
+      {recommendedShows.length === 0 && !isLoading && (
+        <p className="text-white mt-4">No recommendations available.</p>
       )}
     </div>
   );
