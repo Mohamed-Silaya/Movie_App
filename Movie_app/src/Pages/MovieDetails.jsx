@@ -4,36 +4,62 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorite, selectFavorites } from "../store/favoritesSlice";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { axiosInstance, axiosImages } from "../apis/config.js";
+import { Link } from "react-router-dom";
 import "../assets/css/MovieDetails.css";
 
 export default function MovieDetails() {
   const [movie, setMovie] = useState();
+  const [recommendedMovies, setRecommendedMovies] = useState([]); 
+
   const [isLoading, setIsLoading] = useState(true);
   const params = useParams();
-
+  // ===========================================================
   const dispatch = useDispatch();
   const favorites = useSelector(selectFavorites);
-const isFavorite = favorites.some(fav => fav.id === movie?.id && fav.type === "movie");
+  const isFavorite = favorites.some(
+    (fav) => fav.id === movie?.id && fav.type === "movie"
+  );
 
-const handleFavoriteClick = (e) => {
-  e.stopPropagation();
-  dispatch(toggleFavorite({
-    id: movie.id,
-    type: "movie",
-    title: movie.title,
-    poster_path: movie.poster_path,
-    release_date: movie.release_date
-  }));
-};
-  const movieId = Number(params.id);
+  const handleFavoriteClick = (e) => {
+    e.stopPropagation();
+    dispatch(
+      toggleFavorite({
+        id: movie.id,
+        type: "movie",
+        title: movie.title,
+        poster_path: movie.poster_path,
+        release_date: movie.release_date,
+      })
+    );
+  };
+  // ===========================================================
+  const { id } = useParams();
+  const movieId = Number(id);
 
   useEffect(() => {
-    axiosInstance
-      .get(`/movie/${params.id}`)
-      .then((res) => setMovie(res.data))
-      .catch((err) => console.log(err))
-      .finally(() => setIsLoading(false));
-  }, [params.id]);
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        const [movieResponse, recommendationsResponse] = await Promise.all([
+          axiosInstance.get(`/movie/${id}`),
+          axiosInstance.get(`/movie/${id}/recommendations`),
+        ]);
+
+        setMovie(movieResponse.data);
+        setRecommendedMovies(recommendationsResponse.data.results || []);
+        // Shows limited recommendations
+        // setRecommendedMovies(
+        //   recommendationsResponse.data.results.slice(0, 6) || []
+        // );
+      } catch (err) {
+        console.error("Error fetching data:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [movieId]);
 
   return (
     <div className="movie-details-container">
@@ -49,7 +75,9 @@ const handleFavoriteClick = (e) => {
             className="movie-backdrop"
             style={{
               backgroundImage: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                url(${axiosImages.defaults.baseURL}${movie?.backdrop_path || ''})`
+                url(${axiosImages.defaults.baseURL}${
+                movie?.backdrop_path || ""
+              })`,
             }}
           >
             <div className="movie-content animate-fade-in">
@@ -60,12 +88,12 @@ const handleFavoriteClick = (e) => {
                   alt={movie.title}
                 />
 
-<div className="favorite-heart-container">
-    <FaHeart
-      className={`heart-icon ${isFavorite ? 'active' : ''}`}
-      onClick={handleFavoriteClick}
-    />
-  </div>                 
+                <div className="favorite-heart-container">
+                  <FaHeart
+                    className={`heart-icon ${isFavorite ? "active" : ""}`}
+                    onClick={handleFavoriteClick}
+                  />
+                </div>
               </div>
 
               <div className="details-section animate-slide-in-delayed">
@@ -87,9 +115,7 @@ const handleFavoriteClick = (e) => {
                   </div>
                 )}
 
-                {movie.overview && (
-                  <p className="overview">{movie.overview}</p>
-                )}
+                {movie.overview && <p className="overview">{movie.overview}</p>}
 
                 <div className="additional-info">
                   <div className="info-group">
@@ -105,6 +131,39 @@ const handleFavoriteClick = (e) => {
             </div>
           </div>
         )
+      )}
+
+      {/* Recommendations Section */}
+      {recommendedMovies.length > 0 && (
+        <div className="recommendations-section mt-5">
+          <h2 className="text-white mb-3">Recommended Movies</h2>
+          <div className="d-flex gap-3 overflow-auto pb-3">
+            {recommendedMovies.map((movie) => (
+              <Link
+                to={`/MovieDetails/${movie.id}`}
+                key={movie.id}
+                className="text-center flex-shrink-0 recommendation-card"
+              >
+                <img
+                  src={`${axiosImages.defaults.baseURL}${movie.poster_path}`}
+                  alt={movie.title}
+                  className="img-fluid rounded"
+                  style={{
+                    width: "150px",
+                    height: "225px",
+                    objectFit: "cover",
+                  }}
+                />
+                <p className="text-white mt-1 mb-0">{movie.title}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* if no recommendations */}
+      {recommendedMovies.length === 0 && !isLoading && (
+        <p className="text-white mt-4">No recommendations available.</p>
       )}
     </div>
   );

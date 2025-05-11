@@ -138,3 +138,21 @@
     transform: scale(1.1);
   }
   
+
+  /* recommendation  */
+  .recommendation-card {
+  transition: transform 0.2s ease;
+  text-decoration: none;
+}
+
+.recommendation-card:hover {
+  transform: translateY(-5px);
+}
+
+.recommendation-card img {
+  transition: box-shadow 0.2s ease;
+}
+
+.recommendation-card:hover img {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
