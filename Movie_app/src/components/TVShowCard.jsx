@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorite } from "../store/favoritesSlice";
 import { useNavigate } from "react-router-dom";
 import "../assets/css/TVShowCard.css";
-
+//
 const TVShowCard = ({ show }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
