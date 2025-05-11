@@ -1,11 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function Navbar() {
+  const { language, setLanguage } = useLanguage();
+  const languages = ["en", "ar", "fr", "zh"];
+
+  const handleChangeLanguage = (lang) => {
+    setLanguage(lang); 
+  };
+
   return (
     <nav
-      className="navbar navbar-expand-lg "
+      className="navbar navbar-expand-lg"
       style={{ backgroundColor: "#5367ff" }}
     >
       <div className="container-fluid d-flex justify-content-between align-items-center px-4">
@@ -18,19 +26,24 @@ export default function Navbar() {
             <button
               className="btn btn-sm dropdown-toggle text-white"
               type="button"
+              id="languageDropdown"
               data-bs-toggle="dropdown"
               aria-expanded="false"
               style={{ backgroundColor: "transparent", border: "none" }}
             >
-              En
+              {language.toUpperCase()}
             </button>
-            <ul className="dropdown-menu">
-              <li>
-                <button className="dropdown-item">EN</button>
-              </li>
-              <li>
-                <button className="dropdown-item">AR</button>
-              </li>
+            <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+              {languages.map((lang) => (
+                <li key={lang}>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => handleChangeLanguage(lang)}
+                  >
+                    {lang.toUpperCase()}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
           <Link

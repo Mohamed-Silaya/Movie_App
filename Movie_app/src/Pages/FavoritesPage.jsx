@@ -1,13 +1,17 @@
+
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectFavorites, toggleFavorite } from '../store/favoritesSlice';
+import { useLanguage } from "../context/LanguageContext";
 import "../assets/css/MovieCard.css"; 
+
 export default function FavoritesPage() {
   const favorites = useSelector(selectFavorites);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [selectedType, setSelectedType] = useState('movie');
+  const { language } = useLanguage();
 
   const filteredFavorites = favorites.filter(fav => fav.type === selectedType);
   const isFavorite = (id) => favorites.some(f => f.id === id);
@@ -24,19 +28,21 @@ export default function FavoritesPage() {
   return (
     <div className="container min-vh-100 py-5">
       <div className="text-center mb-4">
-        <h2 className="text-white">Favorites</h2>
+        <h2 className="text-white">
+          {language === 'ar' ? 'المفضلة' : 'Favorites'}
+        </h2>
         <div className="d-flex justify-content-center gap-3 mt-3">
           <button
             className={`btn btn-outline-success rounded-pill px-4 ${selectedType === 'movie' ? 'active' : ''}`}
             onClick={() => setSelectedType('movie')}
           >
-            Movies
+            {language === 'ar' ? 'أفلام' : 'Movies'}
           </button>
           <button
             className={`btn btn-outline-success rounded-pill px-4 ${selectedType === 'tv' ? 'active' : ''}`}
             onClick={() => setSelectedType('tv')}
           >
-            TV Shows
+            {language === 'ar' ? 'مسلسلات' : 'TV Shows'}
           </button>
         </div>
       </div>
@@ -73,7 +79,11 @@ export default function FavoritesPage() {
             </div>
           ))
         ) : (
-          <p className="text-light text-center">No favorites found in this category.</p>
+          <p className="text-light text-center">
+            {language === 'ar'
+              ? 'لا توجد عناصر مفضلة في هذه الفئة.'
+              : 'No favorites found in this category.'}
+          </p>
         )}
       </div>
     </div>

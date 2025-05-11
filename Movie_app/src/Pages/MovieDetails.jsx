@@ -2,23 +2,23 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorite, selectFavorites } from "../store/favoritesSlice";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 import { axiosInstance, axiosImages } from "../apis/config.js";
 import { Link } from "react-router-dom";
 import "../assets/css/MovieDetails.css";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function MovieDetails() {
   const [movie, setMovie] = useState();
-  const [recommendedMovies, setRecommendedMovies] = useState([]); 
-
+  const [recommendedMovies, setRecommendedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const params = useParams();
-  // ===========================================================
   const dispatch = useDispatch();
   const favorites = useSelector(selectFavorites);
   const isFavorite = favorites.some(
     (fav) => fav.id === movie?.id && fav.type === "movie"
   );
+  const { language } = useLanguage();
 
   const handleFavoriteClick = (e) => {
     e.stopPropagation();
@@ -32,7 +32,7 @@ export default function MovieDetails() {
       })
     );
   };
-  // ===========================================================
+
   const { id } = useParams();
   const movieId = Number(id);
 
@@ -41,16 +41,12 @@ export default function MovieDetails() {
       try {
         setIsLoading(true);
         const [movieResponse, recommendationsResponse] = await Promise.all([
-          axiosInstance.get(`/movie/${id}`),
-          axiosInstance.get(`/movie/${id}/recommendations`),
+          axiosInstance.get(`/movie/${id}?language=${language}`),
+          axiosInstance.get(`/movie/${id}/recommendations?language=${language}`),
         ]);
 
         setMovie(movieResponse.data);
         setRecommendedMovies(recommendationsResponse.data.results || []);
-        // Shows limited recommendations
-        // setRecommendedMovies(
-        //   recommendationsResponse.data.results.slice(0, 6) || []
-        // );
       } catch (err) {
         console.error("Error fetching data:", err);
       } finally {
@@ -59,7 +55,7 @@ export default function MovieDetails() {
     };
 
     fetchData();
-  }, [movieId]);
+  }, [movieId, language]);
 
   return (
     <div className="movie-details-container">
@@ -133,7 +129,6 @@ export default function MovieDetails() {
         )
       )}
 
-      {/* Recommendations Section */}
       {recommendedMovies.length > 0 && (
         <div className="recommendations-section mt-5">
           <h2 className="text-white mb-3">Recommended Movies</h2>
@@ -161,10 +156,10 @@ export default function MovieDetails() {
         </div>
       )}
 
-      {/* if no recommendations */}
       {recommendedMovies.length === 0 && !isLoading && (
         <p className="text-white mt-4">No recommendations available.</p>
       )}
     </div>
   );
 }
+

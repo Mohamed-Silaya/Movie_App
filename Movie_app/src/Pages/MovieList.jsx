@@ -3,6 +3,7 @@ import { axiosInstance } from "../apis/config";
 import "../assets/css/MovieList.css";
 import MovieCard from "../components/MovieCard";
 import SearchBar from "../components/SearchBar";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function MovieList() {
   const [movies, setMovies] = useState([]);
@@ -10,12 +11,13 @@ export default function MovieList() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pages, setPages] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
+  const { language } = useLanguage();
 
   const fetchMovies = (page = 1, query = "") => {
     setIsLoading(true);
     const endpoint = query
-      ? `/search/movie?query=${query}&page=${page}`
-      : `/movie/now_playing?page=${page}`;
+      ? `/search/movie?query=${query}&page=${page}&language=${language}`
+      : `/movie/now_playing?page=${page}&language=${language}`;
 
     axiosInstance
       .get(endpoint)
@@ -29,7 +31,7 @@ export default function MovieList() {
 
   useEffect(() => {
     fetchMovies(currentPage, searchQuery);
-  }, [currentPage]);
+  }, [currentPage, language]);
 
   const handlePageClick = (newPage) => {
     if (newPage >= 1 && newPage <= pages) {
@@ -38,7 +40,7 @@ export default function MovieList() {
   };
 
   const handleSearchClick = () => {
-    setCurrentPage(1); // Reset to first page
+    setCurrentPage(1);
     fetchMovies(1, searchQuery);
   };
 
@@ -66,14 +68,10 @@ export default function MovieList() {
     return pageNum;
   };
 
-  const handleBackToHome = () => {};
-
   return (
     <div className="movie-list-container">
       <div className="container">
-    
-        <SearchBar /> 
-
+        <SearchBar />
         <div className="heading text-center">
           <h2>Movie List</h2>
         </div>
@@ -95,19 +93,6 @@ export default function MovieList() {
             )}
           </div>
         )}
-
-
-        <div className="row">
-          {movies && movies.length > 0 ? (
-            movies.map((movie) => (
-              <div className="col-md-3" key={movie.id}>
-                <MovieCard movieItem={movie} />
-              </div>
-            ))
-          ) : (
-            <p>No movies found.</p>
-          )}
-        </div>
         <nav aria-label="Page navigation example">
           <ul className="pagination justify-content-center mt-3">
             <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
