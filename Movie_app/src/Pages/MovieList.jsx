@@ -11,23 +11,35 @@ export default function MovieList() {
   const [pages, setPages] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
 
-  useEffect(() => {
+  const fetchMovies = (page = 1, query = "") => {
+    setIsLoading(true);
+    const endpoint = query
+      ? `/search/movie?query=${query}&page=${page}`
+      : `/movie/now_playing?page=${page}`;
+
     axiosInstance
-      .get(
-        `/movie/now_playing?page=${currentPage}&api_key=7770c7457a5d7ebb34d378549071963f`
-      )
+      .get(endpoint)
       .then((res) => {
         setMovies(res.data.results);
         setPages(res.data.total_pages);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.error(err))
       .finally(() => setIsLoading(false));
+  };
+
+  useEffect(() => {
+    fetchMovies(currentPage, searchQuery);
   }, [currentPage]);
 
   const handlePageClick = (newPage) => {
     if (newPage >= 1 && newPage <= pages) {
       setCurrentPage(newPage);
     }
+  };
+
+  const handleSearchClick = () => {
+    setCurrentPage(1); // Reset to first page
+    fetchMovies(1, searchQuery);
   };
 
   const handlePageNum = () => {
@@ -51,42 +63,32 @@ export default function MovieList() {
     return pageNum;
   };
 
-  const handleSearchClick = () => {
-    if (searchQuery) {
-    
-    }
-  };
-
-  const handleBackToHome = () => {
-    
-  };
-
   return (
     <div className="movie-list-container">
       <div className="container">
-        <SearchBar value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+    
+        <SearchBar /> 
         <div className="heading text-center">
           <h2>Movie List</h2>
         </div>
         <hr />
-        {isLoading && (
+        {isLoading ? (
           <div className="spinner-border" role="status">
             <span className="visually-hidden">Loading...</span>
           </div>
+        ) : (
+          <div className="row">
+            {movies && movies.length > 0 ? (
+              movies.map((movie) => (
+                <div className="col-md-3" key={movie.id}>
+                  <MovieCard movieItem={movie} />
+                </div>
+              ))
+            ) : (
+              <p>No movies found.</p>
+            )}
+          </div>
         )}
-  
-        <div className="row">
-        
-          {movies && movies.length > 0 ? (
-            movies.map((movie) => (
-              <div className="col-md-3" key={movie.id}>
-                <MovieCard movieItem={movie} />
-              </div>
-            ))
-          ) : (
-            <p>No movies found.</p>
-          )}
-        </div>
         <nav aria-label="Page navigation example">
           <ul className="pagination justify-content-center mt-3">
             <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
