@@ -9,24 +9,21 @@ const TVShowCard = ({ show }) => {
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites.items);
 
-  // Check if the show is already in the favorites list
   const isFavorite = favorites.some((item) => item.id === show.id);
 
-  // Redirect to the details page of the selected TV show
   const goToDetails = () => {
     navigate(`/TVShowDetails/${show.id}`);
   };
 
-  // Toggle the favorite status of the show
   const handleFavoriteToggle = (e) => {
-    e.stopPropagation(); // Prevent card click when clicking the heart icon
+    e.stopPropagation(); 
     dispatch(
       toggleFavorite({
         id: show.id,
         name: show.name,
         poster_path: show.poster_path,
         first_air_date: show.first_air_date,
-        type: "tv", // type 'tv' for TV shows
+        type: "tv", 
       })
     );
   };
