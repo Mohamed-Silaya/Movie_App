@@ -1,16 +1,16 @@
-/* MovieDetails.css */
-.movie-details-container {
+/* tvshowDetails.css */
+.tvshow-details-container {
     color: white;
     min-height: 100vh;
   }
   
-  .movie-backdrop {
+  .tvshow-backdrop {
     background-size: cover;
     background-position: center;
     padding: 2rem;
   }
   
-  .movie-content {
+  .tvshow-content {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
@@ -22,7 +22,7 @@
     flex: 0 0 300px;
   }
   
-  .movie-poster {
+  .tvshow-poster {
     width: 100%;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
@@ -32,7 +32,7 @@
     flex: 1;
   }
   
-  .movie-title {
+  .tvshow-title {
     font-size: 2.5rem;
     margin-bottom: 1rem;
   }
@@ -87,7 +87,7 @@
   
   /* Responsive Design */
   @media (max-width: 768px) {
-    .movie-content {
+    .tvshow-content {
       flex-direction: column;
       align-items: center;
     }
@@ -97,7 +97,7 @@
       max-width: 250px;
     }
     
-    .movie-title {
+    .tvshow-title {
       font-size: 2rem;
       text-align: center;
     }
@@ -116,43 +116,4 @@
     animation: spin 1s linear infinite;
     margin: 2rem auto;
   }
-  /*fav icon*/
-  .favorite-heart-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-  }
   
-  .heart-icon {
-    font-size: 2.2rem;
-    color: white;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-  }
-  
-  .heart-icon.active {
-    color: red;
-  }
-  
-  .heart-icon:hover {
-    transform: scale(1.1);
-  }
-  
-
-  /* recommendation  */
-  .recommendation-card {
-  transition: transform 0.2s ease;
-  text-decoration: none;
-}
-
-.recommendation-card:hover {
-  transform: translateY(-5px);
-}
-
-.recommendation-card img {
-  transition: box-shadow 0.2s ease;
-}
-
-.recommendation-card:hover img {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-}
