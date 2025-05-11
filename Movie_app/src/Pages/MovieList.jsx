@@ -9,6 +9,7 @@ export default function MovieList() {
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [pages, setPages] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     axiosInstance
@@ -50,10 +51,20 @@ export default function MovieList() {
     return pageNum;
   };
 
+  const handleSearchClick = () => {
+    if (searchQuery) {
+    
+    }
+  };
+
+  const handleBackToHome = () => {
+    
+  };
+
   return (
     <div className="movie-list-container">
       <div className="container">
-        <SearchBar /> {/* ✅ Show search bar at top */}
+        <SearchBar value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
         <div className="heading text-center">
           <h2>Movie List</h2>
         </div>
@@ -63,12 +74,18 @@ export default function MovieList() {
             <span className="visually-hidden">Loading...</span>
           </div>
         )}
+  
         <div className="row">
-          {movies.map((movie) => (
-            <div className="col-md-3" key={movie.id}>
-              <MovieCard movieItem={movie} />
-            </div>
-          ))}
+        
+          {movies && movies.length > 0 ? (
+            movies.map((movie) => (
+              <div className="col-md-3" key={movie.id}>
+                <MovieCard movieItem={movie} />
+              </div>
+            ))
+          ) : (
+            <p>No movies found.</p>
+          )}
         </div>
         <nav aria-label="Page navigation example">
           <ul className="pagination justify-content-center mt-3">

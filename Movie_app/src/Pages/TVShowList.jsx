@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import TVShowCard from "../components/TVShowCard" ;
+import TVShowCard from "../components/TVShowCard";
 import "../assets/css/TVShowsList.css";
+import SearchBar from "../components/SearchBar";
 
 const API_KEY = "7770c7457a5d7ebb34d378549071963f";
 
@@ -10,6 +11,7 @@ const TVShowList = () => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const fetchTVShows = async (pageNum) => {
       setLoading(true);     
@@ -24,12 +26,16 @@ const TVShowList = () => {
       } finally {
         setLoading(false);
       }
-    };
+  };
 
-    useEffect(() => {
+  useEffect(() => {
      fetchTVShows(page);
   }, [page]);
 
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    
+  };
 
   const goToNextPage = () => setPage((prev) => prev + 1);
   const goToPrevPage = () => setPage((prev) => (prev > 1 ? prev - 1 : 1));
@@ -39,11 +45,16 @@ const TVShowList = () => {
 
   return (
     <div className="tv-show-list">
+      <SearchBar onSearch={handleSearch} /> 
       <h2>TV Shows</h2>
       <div className="tv-show-grid">
-        {tvShows.map((show) => (
-          <TVShowCard key={show.id} show={show} />
-        ))}
+        {tvShows
+          .filter((show) =>
+            show.name.toLowerCase().includes(searchQuery.toLowerCase())
+          )
+          .map((show) => (
+            <TVShowCard key={show.id} show={show} />
+          ))}
       </div>
       <div className="pagination">
         <button onClick={goToPrevPage} disabled={page === 1}>
