@@ -66,11 +66,8 @@ export default function MovieList() {
   return (
     <div className="movie-list-container">
       <div className="container">
-        <SearchBar
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          onSearch={handleSearchClick}
-        />
+    
+        <SearchBar /> 
         <div className="heading text-center">
           <h2>Movie List</h2>
         </div>
