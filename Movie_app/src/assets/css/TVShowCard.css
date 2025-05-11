@@ -54,10 +54,9 @@
   padding: 5px 10px;
   font-size: 12px;
   cursor: pointer;
-  transition: background 0.3s, color 0.3s;
+  transition:  0.3s, color 0.3s;
 }
 
 .like-button:hover {
-  background: #b30b13;
   color: white;
 }
