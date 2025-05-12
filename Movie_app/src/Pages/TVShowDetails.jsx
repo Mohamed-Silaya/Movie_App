@@ -118,10 +118,10 @@ import { toggleFavorite, selectFavorites } from "../store/favoritesSlice";
 import { FaHeart } from "react-icons/fa";
 import { axiosInstance, axiosImages } from "../apis/config.js";
 import "../assets/css/TVShowDetails.css";
-<<<<<<< HEAD
+
 import { useLanguage } from "../context/LanguageContext";
-=======
->>>>>>> 7be876ea94c75750ffd5a1c5032bf5a6660ed0ab
+
+
 
 export default function TvShowDetails() {
   const [tvshow, setTvShow] = useState();
@@ -149,23 +149,48 @@ export default function TvShowDetails() {
     );
   };
 
+
+
+
+  //   useEffect(() => {
+
+  //       axiosInstance
+  //         .get(`/tv/${params.id}?language=${language}`)
+  //         .then((res) => setTvShow(res.data))
+  //         .catch((err) => console.log(err))
+  //         .finally(() => setIsLoading(false));
+  //   }, [params.id, language]);
+
+    
+  //   const fetchData = async () => {
+  //     try {
+  //       setIsLoading(true);
+  //       const [showResponse, recommendationsResponse] = await Promise.all([
+  //         axiosInstance.get(`/tv/${id}`),
+  //         axiosInstance.get(`/tv/${id}/recommendations`)
+  //       ]);
+  
+  //       setTvShow(showResponse.data);
+  //       setRecommendedShows(recommendationsResponse.data.results);
+  //     } catch (err) {
+  //       console.error("Error fetching data:", err);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
+  
+  //   fetchData();
+  // }, [id];
+
   useEffect(() => {
-<<<<<<< HEAD
-    axiosInstance
-      .get(`/tv/${params.id}?language=${language}`)
-      .then((res) => setTvShow(res.data))
-      .catch((err) => console.log(err))
-      .finally(() => setIsLoading(false));
-  }, [params.id, language]);
-=======
     const fetchData = async () => {
       try {
         setIsLoading(true);
         const [showResponse, recommendationsResponse] = await Promise.all([
-          axiosInstance.get(`/tv/${id}`),
-          axiosInstance.get(`/tv/${id}/recommendations`)
+          axiosInstance.get(`/tv/${id}?language=${language}`),
+          axiosInstance.get(`/tv/${id}/recommendations?language=${language}`)
         ]);
-
+  
         setTvShow(showResponse.data);
         setRecommendedShows(recommendationsResponse.data.results);
       } catch (err) {
@@ -174,11 +199,11 @@ export default function TvShowDetails() {
         setIsLoading(false);
       }
     };
-
+  
     fetchData();
-  }, [id]);
->>>>>>> 7be876ea94c75750ffd5a1c5032bf5a6660ed0ab
-
+  }, [id, language]);
+  
+  
   return (
     <div className="tvshow-details-container">
       {isLoading ? (

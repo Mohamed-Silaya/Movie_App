@@ -84,7 +84,7 @@ export default function MovieList() {
           <div className="row">
             {movies && movies.length > 0 ? (
               movies.map((movie) => (
-                <div className="col-md-3" key={movie.id}>
+                <div className="col-md-4 col-sm-12 col-lg-3" key={movie.id}>
                   <MovieCard movieItem={movie} />
                 </div>
               ))
