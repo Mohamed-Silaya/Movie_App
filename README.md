@@ -88,12 +88,15 @@ This project is licensed under the MIT License.
 
 ---
 
-Made with ❤️ by
-[Ahmed Mohamed abd-elkader](https://github.com/ahmedabd-elkader)
-[Esraa Anwer](https://github.com/EsraaAnwerIsmail)
-[Fatma Mosaad](https://github.com/Fatma-mosaad)
-[Hazem Helal](https://github.com/Hazemhelal14)
-[Hossam Mohamed](https://github.com/hossamkoky599)
-[Mohamed Silaya](https://github.com/Mohamed-Silaya)
+# Made with ❤️ by
+### [Ahmed Mohamed abd-elkader](https://github.com/ahmedabd-elkader)
+### [Esraa Anwer](https://github.com/EsraaAnwerIsmail)
+### [Fatma Mosaad](https://github.com/Fatma-mosaad)
+### [Hazem Helal](https://github.com/Hazemhelal14)
+### [Hossam Mohamed](https://github.com/hossamkoky599)
+### [Mohamed Silaya](https://github.com/Mohamed-Silaya)
+Together, we crafted this app with dedication, collaboration, and lots of ☕ & 💻!
+
+
 
 ---
