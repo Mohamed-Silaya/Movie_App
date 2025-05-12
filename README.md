@@ -12,7 +12,7 @@ A sleek and modern React-based Movie App that allows users to browse trending fi
 
 ## 🧰 Tech Stack
 
-- **Frontend**: React.js, JSX, CSS
+- **Frontend**: React.js, JSX, CSS, Bootstrap
 - **Routing**: React Router
 - **API**: [TMDb API](https://www.themoviedb.org/)
 - **HTTP Client**: Axios
