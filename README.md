@@ -1,5 +1,16 @@
 # 🎬 Movie App
 
+
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+[![Vite](https://img.shields.io/badge/Vite-%23646CFF.svg?style=flat&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![React Router](https://img.shields.io/badge/React_Router-CA4245?style=flat&logo=react-router&logoColor=white)](https://reactrouter.com/)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=flat&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
+[![Axios](https://img.shields.io/badge/Axios-5A29E4?style=flat&logo=axios&logoColor=white)](https://axios-http.com/)
+[![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat&logo=vercel&logoColor=white)](https://vercel.com)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-FF6B6B?style=flat&logo=firefox&logoColor=white)](https://movie-app-4n6i.vercel.app/)
+
+
 A sleek and modern React-based Movie App that allows users to browse trending films, search for specific titles, and view detailed movie information. Powered by the TMDb (The Movie Database) API, this project delivers a smooth and intuitive user experience with a fully responsive UI.
 
 ## 🚀 Features
@@ -12,10 +23,15 @@ A sleek and modern React-based Movie App that allows users to browse trending fi
 
 ## 🧰 Tech Stack
 
+[![Tech Stack](https://skillicons.dev/icons?i=vite,react,js,html,css,bootstrap,vercel,git,github)](https://skillicons.dev)
+
 - **Frontend**: React.js, JSX, CSS, Bootstrap
+- **Build Tool**: Vite
 - **Routing**: React Router
-- **API**: [TMDb API](https://www.themoviedb.org/)
+- **API**: [![TMDb](https://img.shields.io/badge/TMDb-01D277?style=flat&logo=themoviedatabase&logoColor=white)](https://www.themoviedb.org/)
 - **HTTP Client**: Axios
+- **Deployment**: Vercel
+
 
 ## 📦 Installation
 
